@@ -6,6 +6,6 @@ sbt is included so run:
 
 then go to
 
-    http://127.0.0.1:8080
+    http://localhost:8080/static-comet
 
-And you will see the 3 different implementations of a chat app. You can open each page on different browser windows, and talk to yourself from each of them :)
+And you will see a button. When pressed a new comet-actor will be added, but the content won't auto-update before the long-poll is refreshed.
