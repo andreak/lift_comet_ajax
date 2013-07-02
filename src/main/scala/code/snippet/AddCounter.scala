@@ -5,23 +5,18 @@ import net.liftweb.http._
 import net.liftweb.http.js._
 import scala.xml.NodeSeq
 import net.liftweb.util.Helpers._
+import code.comet.CometRenderer
+import code.view.RegisterComet
 
 object AddCounter extends Loggable {
 
-  def render = SHtml.ajaxButton("Add Counter", () => addDynamicComet(), ("class" -> "btn btn-success")  )
+  val cometBody = <div>
+    <span>Comet Name</span>
+    <span id="name"></span>
+    <span>Counter</span>
+    <span id="number"></span>
+  </div>
 
-  def addDynamicComet(): JsCmd = {
-    val html = S.runTemplate("counter":: Nil)
-    val cometId = html.map{ h =>
-      h \ "div" \ "@id"
-    }
-
-    val cleanedHtmlAsString = (html.openOr( NodeSeq.Empty )).toString().encJs
-    val addChatbox = """$("#counter").append(%s)""".format( cleanedHtmlAsString )
-
-    JE.JsRaw("""lift_toWatch['%s'] = '%s'""".format( cometId.getOrElse("default-id"), nextNum ) ).cmd &
-      JE.JsRaw("""console.log(lift_toWatch)""").cmd &
-      JE.JsRaw(addChatbox).cmd
-  }
+  def render = SHtml.ajaxButton("Add Counter", () => RegisterComet("counter", CometRenderer("Counter", nextFuncName, cometBody)))
 
 }

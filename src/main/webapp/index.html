@@ -1,13 +1,13 @@
 <html>
 <head><title>Home</title></head>
 <body class="lift:content_id=main">
-  <div id="main" class="lift:surround?with=default;at=content">
+<div id="main" class="lift:surround?with=default;at=content">
+    <div data-lift="comet?type=Snabel"></div><!-- This comet needs to be here for Lift's cometJS to be included on the page -->
     <div>
-      <button class="btn btn-danger" data-lift="AddCounter">Add Counter</button>
+        <button class="btn btn-danger" data-lift="AddCounter">Add Counter</button>
     </div>
-    <div data-lift="embed?what=/counter"></div>
     <div id="counter"></div>
-  </div>
+</div>
 </body>
 </html>
 
